@@ -1,0 +1,33 @@
+version: "3.1"
+
+networks:
+  net:
+
+services:
+  postgres:
+    image: postgres:alpine3.18
+    restart: on-failure
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    networks:
+      - net
+
+  adminer:
+    image: adminer:4.8.1
+    restart: on-failure
+    ports:
+      - "127.0.0.1:5050:8080"
+    environment:
+      ADMINER_DESIGN: hever
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DEFAULT_TYPE: postgresql
+      ADMINER_DEFAULT_PORT: 5432
+      ADMINER_DEFAULT_DB: db
+      ADMINER_DEFAULT_USER: user
+      ADMINER_DEFAULT_PASSWORD: pass
+    networks:
+      - net
