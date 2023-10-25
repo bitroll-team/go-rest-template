@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/caarlos0/env/v9"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 type DBEngine string
